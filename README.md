@@ -6,7 +6,9 @@
 
 More information for the meetup can be found [here](https://www.meetup.com/Cardiff-Tech-Talk/events/260506089/).
 
-## Setup
+## Introduction
+
+### Setup
 
 We're going to offer 3 different ways to run a cluster:
 
@@ -16,9 +18,9 @@ We're going to offer 3 different ways to run a cluster:
 
 You're more than welcome to use another service if you already know how to.
 
-## Steps
+### Steps
 
-### Create a Pod and a Service
+#### Create a Pod and a Service
 
 * Save the following to _apple.yaml_:
 
@@ -52,7 +54,7 @@ spec:
 $ kubectl apply -f apple.yaml
 ```
 
-## Create another Pod and Service
+### Create another Pod and Service
 
 * Save the following to _banana.yaml_:
 
@@ -86,7 +88,7 @@ spec:
 $ kubectl apply -f apple.yaml
 ```
 
-## Create an Ingress
+### Create an Ingress
 
 * Save the following to _ingress.yaml_:
 
@@ -124,7 +126,7 @@ spec:
 $ kubectl apply -f ingress.yaml
 ```
 
-## Test your cluster
+### Test your cluster
 
 * Using `curl`:
 
@@ -163,6 +165,10 @@ $ curl demo.local/banana
   * http://demo.local
   * http://demo.local/apple
   * http://demo.local/banana
+
+## Exercises
+
+When you're ready, try out these exercises [here](exercises/README.md)
 
 ## Clean up
 
