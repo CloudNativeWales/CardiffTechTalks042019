@@ -124,6 +124,46 @@ spec:
 $ kubectl apply -f ingress.yaml
 ```
 
+## Test your cluster
+
+* Using `curl`:
+
+```bash
+$ curl demo.local
+<html style="background-color:#8db600 ">
+  <head>
+    <title>v1.0.0</title>
+  </head>
+  <body style="display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-family:sans-serif;font-size:6rem;margin:0;letter-spacing:-0.1em">
+    <h1>Apple</h1>
+  </body>
+</html>
+$ curl demo.local/apple
+<html style="background-color:#8db600 ">
+  <head>
+    <title>v1.0.0</title>
+  </head>
+  <body style="display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-family:sans-serif;font-size:6rem;margin:0;letter-spacing:-0.1em">
+    <h1>Apple</h1>
+  </body>
+</html>
+$ curl demo.local/banana
+<html style="background-color:#ffe135 ">
+  <head>
+    <title>v1.0.0</title>
+  </head>
+  <body style="display:flex;align-items:center;justify-content:center;color:#000000;font-family:sans-serif;font-size:6rem;margin:0;letter-spacing:-0.1em">
+    <h1>Banana</h1>
+  </body>
+</html>
+```
+
+* Using your browser:
+
+  * http://demo.local
+  * http://demo.local/apple
+  * http://demo.local/banana
+
 ## Clean up
 
 * [Minikube](minikube/CLEANUP.md)
