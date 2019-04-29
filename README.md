@@ -160,6 +160,77 @@ $ curl demo.local/banana
 </html>
 ```
 
+### Delete your pods
+
+```bash
+$ kubectl delete pod apple-app banana-app
+pod "apple-app" deleted
+pod "banana-app" deleted
+```
+
+### Create your deployments
+
+* Save the following to _apple-deployment.yaml_:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apple-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apple
+  template:
+    metadata:
+      labels:
+        app: apple
+    spec:
+      containers:
+      - name: apple
+        image: denhamparry/apple:1.0.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+```
+
+* Send the file to Kubernetes:
+
+```bash
+$ kubectl apply -f apple-deployment.yaml
+```
+* Save the following to _banana-deployment.yaml_:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banana-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banana
+  template:
+    metadata:
+      labels:
+        app: banana
+    spec:
+      containers:
+      - name: banana
+        image: denhamparry/banana:1.0.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+```
+
+* Send the file to Kubernetes:
+
+```bash
+$ kubectl apply -f banana-deployment.yaml
+```
+
 * Using your browser:
 
   * http://demo.local
