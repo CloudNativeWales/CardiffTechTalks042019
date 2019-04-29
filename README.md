@@ -20,9 +20,10 @@ You're more than welcome to use another service if you already know how to.
 
 ### Create a Pod and a Service
 
-* Save the following to _apple.yaml_.
+* Save the following to _apple.yaml_:
 
 ```yaml
+---
 kind: Pod
 apiVersion: v1
 metadata:
@@ -32,12 +33,8 @@ metadata:
 spec:
   containers:
     - name: apple-app
-      image: hashicorp/http-echo
-      args:
-        - "-text=apple"
-
+      image: denhamparry/apple:1.0.0
 ---
-
 kind: Service
 apiVersion: v1
 metadata:
@@ -46,20 +43,88 @@ spec:
   selector:
     app: apple
   ports:
-    - port: 5678 # Default port for image
+    - port: 3000
 ```
+
+* Send the file to Kubernetes:
 
 ```bash
 $ kubectl apply -f apple.yaml
-
 ```
 
 ## Create another Pod and Service
 
+* Save the following to _banana.yaml_:
+
 ```bash
-curl $(minikube ip)/apple
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: banana-app
+  labels:
+    app: banana
+spec:
+  containers:
+    - name: banana-app
+      image: denhamparry/banana:1.0.0
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: banana-service
+spec:
+  selector:
+    app: banana
+  ports:
+    - port: 3000
+```
+
+* Send the file to Kubernetes:
+
+```bash
+$ kubectl apply -f apple.yaml
+```
+
+## Create an Ingress
+
+* Save the following to _ingress.yaml_:
+
+```yaml
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: app
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/rewrite-target: '/'
+spec:
+  rules:
+  - host: demo.local
+    http:
+      paths:
+      - path: /apple
+        backend:
+          serviceName: apple-service
+          servicePort: 3000
+      - path: /banana
+        backend:
+          serviceName: banana-service
+          servicePort: 3000
+      - path: /
+        backend:
+          serviceName: apple-service
+          servicePort: 3000
+```
+
+* Send the file to Kubernetes:
+
+```bash
+$ kubectl apply -f ingress.yaml
 ```
 
 ## Clean up
 
 * [Minikube](minikube/CLEANUP.md)
+* [Docker](docker/CLEANUP.md)
