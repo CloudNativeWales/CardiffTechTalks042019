@@ -55,3 +55,7 @@ $ kubectl apply -f apple.yaml
 ```bash
 curl $(minikube ip)/apple
 ```
+
+## Clean up
+
+* [Minikube](minikube/CLEANUP.md)
