@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.disable('view cache')
 app.get('/*', (req, res) => res.send(`<html style="background-color:#8db600 ">
   <head>
     <title>v1.0.0</title>
