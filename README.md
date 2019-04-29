@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/cloudnativewales/CardiffTechTalks042019](https://badges.gitter.im/cloudnativewales/CardiffTechTalks042019.svg)](https://gitter.im/cloudnativewales/CardiffTechTalks042019?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Description
+
 More information for the meetup can be found [here](https://www.meetup.com/Cardiff-Tech-Talk/events/260506089/).
 
 ## Setup
