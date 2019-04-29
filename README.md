@@ -52,13 +52,15 @@ spec:
 
 ```bash
 $ kubectl apply -f apple.yaml
+pod "apple-app" created
+service "apple-service" created
 ```
 
 ### Create another Pod and Service
 
 * Save the following to _banana.yaml_:
 
-```bash
+```yaml
 ---
 kind: Pod
 apiVersion: v1
@@ -85,7 +87,9 @@ spec:
 * Send the file to Kubernetes:
 
 ```bash
-$ kubectl apply -f apple.yaml
+$ kubectl apply -f banana.yaml
+pod "banana-app" created
+service "banana-service" created
 ```
 
 ### Create an Ingress
@@ -124,6 +128,7 @@ spec:
 
 ```bash
 $ kubectl apply -f ingress.yaml
+ingress.extensions "app" created
 ```
 
 ### Test your cluster
@@ -160,6 +165,12 @@ $ curl demo.local/banana
 </html>
 ```
 
+* Using your browser:
+
+  * http://demo.local
+  * http://demo.local/apple
+  * http://demo.local/banana
+
 ### Delete your pods
 
 ```bash
@@ -178,7 +189,7 @@ kind: Deployment
 metadata:
   name: apple-deployment
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: apple
@@ -199,7 +210,10 @@ spec:
 
 ```bash
 $ kubectl apply -f apple-deployment.yaml
+deployment.apps "apple-deployment" configured
+
 ```
+
 * Save the following to _banana-deployment.yaml_:
 
 ```yaml
@@ -208,7 +222,7 @@ kind: Deployment
 metadata:
   name: banana-deployment
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: banana
@@ -229,13 +243,24 @@ spec:
 
 ```bash
 $ kubectl apply -f banana-deployment.yaml
+deployment.apps "banana-deployment" configured
 ```
 
-* Using your browser:
+### How do we scale deployments
 
-  * http://demo.local
-  * http://demo.local/apple
-  * http://demo.local/banana
+* Change the number of replicas in your _deployment_ files:
+
+```yaml
+...
+  replicas: 5
+...
+```
+
+```bash
+$ kubectl apply -f apple-deployment.yaml -f banana-deployment.yaml
+deployment.apps "apple-deployment" configured
+deployment.apps "banana-deployment" configured
+```
 
 ## Exercises
 
