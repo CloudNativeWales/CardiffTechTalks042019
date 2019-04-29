@@ -14,7 +14,6 @@ We're going to offer 3 different ways to run a cluster:
 
 * [Minikube](minikube/README.md)
 * [Docker: Kubernetes](docker/README.md)
-* [AKS](ask/README.md)
 
 You're more than welcome to use another service if you already know how to.
 
